@@ -100,3 +100,38 @@ if __name__ == '__main__':
     # Use a standard rod as a base case (default values)
     # L = 1.0, T = 0.1 , dx = 0.1, dt = 0.025, cond0 = 0, condL = 0, bc = 'dirichlet', alpha2 = 1.0
     solveheatequation()
+
+    # Modify the material of the base rod to be 99.9% pure silver
+    solveheatequation(alpha2 = 1.6563)
+
+    # Modify the material of the base rod to be air at 300K
+    solveheatequation(alpha2 = 0.19)
+
+    # Modify the material of the base rod to be water
+    solveheatequation(alpha2 = 0.00144)
+
+    #######################################################
+    # Experiments on rod length
+    #######################################################
+
+    solveheatequation(L = 1.0)
+    solveheatequation(L = 2.0)
+    solveheatequation(L = 4.0)
+    solveheatequation(L = 10.0)
+
+    #######################################################
+    # Experiment with various dirichlet boundary conditions
+    #######################################################
+
+    solveheatequation()
+    solveheatequation(cond0 = 50.0, condL = 0.0)
+    solveheatequation(cond0 = 50.0, condL = 50.0)
+    solveheatequation(cond0 = -50.0, condL = -50.0)
+
+    #######################################################
+    # Experiment with various neumann boundary conditions
+    #######################################################
+
+    solveheatequation(cond0 = -0.5, condL = -0.5, bc="neumann")
+    solveheatequation(cond0 = -2.0, condL = -2.0, bc="neumann")
+    solveheatequation(cond0 = -5.0, condL = -5.0, bc="neumann")
