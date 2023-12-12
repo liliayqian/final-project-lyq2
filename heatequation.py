@@ -15,8 +15,8 @@ solveheatequation: solves the heat equation numerically using the Crank-Nicolson
 INPUTS
 L: floating point, length of rod
 T: floating point, total simulation time
-dx: integer, step size along x-axis
-dt: integer, step size along t-axis
+dx: floating point, step size along x-axis
+dt: floating point, step size along t-axis
 cond0: floating point, x=0 boundary condition
 condL: floating point, x=L boundary condition
 bc: string, specifies type of boundary condition
@@ -86,6 +86,8 @@ def solveheatequation(L=1.0, T=0.1, dx=0.1, dt=0.025, cond0=0.0, condL=0.0, bc='
     for j in range(m):
         plt.plot(x, u[:,j], color = [R[j], G, B[j]])
 
+    plt.suptitle('Distance v. Temperature')
+    plt.title('Boundary conditions: ' + bc + '; Alpha-squared: ' + str(alpha2))
     plt.xlabel('distance [m]')
     plt.ylabel('Temperature [$\degree$ C]')
     plt.legend(t)
