@@ -8,6 +8,7 @@ The report for this project is "Final Project Report.pdf."
 To produce the plots in the report, simply run the Python file heatequation.py.
 
 Resources:
+
 Elementary Differential Equations and Boundary Value Problems - Boyce, DiPrima, and Meade
 
 https://web.stanford.edu/class/math220b/handouts/heateqn.pdf
