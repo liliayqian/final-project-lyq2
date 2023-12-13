@@ -47,11 +47,13 @@ def solveheatequation(L=1.0, T=0.1, dx=0.1, dt=0.025, cond0=0.0, condL=0.0, bc='
     # preallocate a matrix to store temperature results with dimensions n by m (x-steps by t-steps)
     u = np.zeros((n, m))
 
+
+    # At time 0, fill every x value with the specified initial conditions
+    u[:, 0] = initialConditions
+
     # Fill the temperature result matrix with the initial conditions
     u[0, :] = boundaryConditions[0]
     u[-1, :] = boundaryConditions[1]
-    # At time 0, fill every x value with the specified initial conditions
-    u[:, 0] = initialConditions
 
     # calculate lambda
     lam = alpha2 * dt/dx**2
@@ -86,13 +88,12 @@ def solveheatequation(L=1.0, T=0.1, dx=0.1, dt=0.025, cond0=0.0, condL=0.0, bc='
     for j in range(m):
         plt.plot(x, u[:,j], color = [R[j], G, B[j]])
 
-    plt.suptitle('Distance v. Temperature')
+    plt.suptitle('Distance v. Temperature by Timestep')
     plt.title('Boundary conditions: ' + bc + '; Alpha-squared: ' + str(alpha2))
     plt.xlabel('distance [m]')
     plt.ylabel('Temperature [$\degree$ C]')
     plt.legend(t)
     plt.show()
-
 
 if __name__ == '__main__':
     #######################################################
@@ -112,6 +113,10 @@ if __name__ == '__main__':
     # Modify the material of the base rod to be water
     solveheatequation(alpha2 = 0.00144)
 
+    # Water bar over a longer simulation time
+    solveheatequation(dt = 2.0, T = 10.0, alpha2 = 0.00144)
+
+
     #######################################################
     # Experiments on rod length
     #######################################################
@@ -126,14 +131,15 @@ if __name__ == '__main__':
     #######################################################
 
     solveheatequation()
-    solveheatequation(cond0 = 50.0, condL = 0.0)
-    solveheatequation(cond0 = 50.0, condL = 50.0)
-    solveheatequation(cond0 = -50.0, condL = -50.0)
+    solveheatequation(dx = 0.01, cond0 = 50.0, condL = 0.0)
+    solveheatequation(dx = 0.01, cond0 = 50.0, condL = 50.0)
+    solveheatequation(dx = 0.01, cond0 = -50.0, condL = -50.0)
 
     #######################################################
     # Experiment with various neumann boundary conditions
     #######################################################
+    solveheatequation(dx = 0.01, cond0 = 0.0, condL = 0.0, bc="neumann")
 
-    solveheatequation(cond0 = -0.5, condL = -0.5, bc="neumann")
-    solveheatequation(cond0 = -2.0, condL = -2.0, bc="neumann")
-    solveheatequation(cond0 = -5.0, condL = -5.0, bc="neumann")
+    solveheatequation(dx = 0.01, cond0 = 2.0, condL = 2.0, bc="neumann")
+    solveheatequation(dx = 0.01, cond0 = 0.5, condL = 0.5, bc="neumann")
+    solveheatequation(dx = 0.01, cond0 = -2.0, condL = -2.0, bc="neumann")
