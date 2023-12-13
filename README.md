@@ -1,4 +1,4 @@
-# finalproject
+# final project lyq2
  MATH260 Final Project
 
 The program ‘heatequation.py’ uses the Crank-Nicolson method to solve the heat diffusion problem 
